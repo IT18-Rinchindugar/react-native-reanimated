@@ -9,5 +9,5 @@ export interface StackNavigationProps<
   route: RouteProp<ParamList, RouteName>;
 }
 export type Routes = {
-    Wallet: undefined;
+    JellyScroll: undefined;
 };
