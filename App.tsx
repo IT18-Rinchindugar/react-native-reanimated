@@ -1,21 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator } from "@react-navigation/stack";
+import { LoadAssets, Routes} from './src/components';
+import { StatusBar } from 'react-native';
+import { Wallet } from './src/Wallet';
 
-export default function App() {
+const fonts = {
+  "SFProText-Bold": require("./assets/fonts/SF-Pro-Text-Bold.otf"),
+  "SFProText-Semibold": require("./assets/fonts/SF-Pro-Text-Semibold.otf"),
+  "SFProText-Regular": require("./assets/fonts/SF-Pro-Text-Regular.otf"),
+};
+
+const Stack = createStackNavigator<Routes>();
+
+const AppNavigator = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Stack.Navigator headerMode="none">
+      <Stack.Screen name="Wallet" component={Wallet}  options={{
+        title: "Wallet",
+      }} />
+    </Stack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
+
+const App = () => {
+  return (
+    <LoadAssets {...{fonts}}>
+        <StatusBar barStyle="light-content" />
+        <AppNavigator/>
+    </LoadAssets>
+  )
+}
+export default App;
